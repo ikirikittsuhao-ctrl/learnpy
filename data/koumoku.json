@@ -24,8 +24,997 @@
   },
   {
     "stepId": "step1",
-    "title": "STEP 1: 基本文法 (準備中)",
-    "mdPath": null,
-    "items": []
+    "title": "STEP 1：Python超入門",
+    "mdPath": "/data/step1.md",
+    "items": [
+      {
+        "id": "05-hello-world",
+        "title": "05 Hello World"
+      },
+      {
+        "id": "06-printを使おう",
+        "title": "06 print()を使おう"
+      },
+      {
+        "id": "07-コメントとコードの読み方",
+        "title": "07 コメントとコードの読み方"
+      },
+      {
+        "id": "08-エラーとの付き合い方",
+        "title": "08 エラーとの付き合い方"
+      },
+      {
+        "id": "09-inputで入力を受け取る",
+        "title": "09 input()で入力を受け取る"
+      }
+    ]
+  },
+  {
+    "stepId": "step2",
+    "title": "STEP 2：変数とデータ",
+    "mdPath": "/data/step2.md",
+    "items": [
+      {
+        "id": "10-変数",
+        "title": "10 変数"
+      },
+      {
+        "id": "11-数値",
+        "title": "11 数値"
+      },
+      {
+        "id": "12-文字列",
+        "title": "12 文字列"
+      },
+      {
+        "id": "13-true-false",
+        "title": "13 True / False"
+      },
+      {
+        "id": "14-none",
+        "title": "14 None"
+      },
+      {
+        "id": "15-型とtype",
+        "title": "15 型とtype()"
+      }
+    ]
+  },
+  {
+    "stepId": "step3",
+    "title": "STEP 3：計算と文字",
+    "mdPath": "/data/step3.md",
+    "items": [
+      {
+        "id": "16-算術演算子",
+        "title": "16 算術演算子"
+      },
+      {
+        "id": "17-比較演算子",
+        "title": "17 比較演算子"
+      },
+      {
+        "id": "18-論理演算子",
+        "title": "18 論理演算子"
+      },
+      {
+        "id": "19-文字列操作",
+        "title": "19 文字列操作"
+      },
+      {
+        "id": "20-f-string",
+        "title": "20 f-string"
+      }
+    ]
+  },
+  {
+    "stepId": "step4",
+    "title": "STEP 4：条件分岐",
+    "mdPath": "/data/step4.md",
+    "items": [
+      {
+        "id": "21-if文",
+        "title": "21 if文"
+      },
+      {
+        "id": "22-elif-else",
+        "title": "22 elif / else"
+      },
+      {
+        "id": "23-条件を組み合わせる",
+        "title": "23 条件を組み合わせる"
+      },
+      {
+        "id": "24-条件分岐実践",
+        "title": "24 条件分岐実践"
+      }
+    ]
+  },
+  {
+    "stepId": "step5",
+    "title": "STEP 5：繰り返し",
+    "mdPath": "/data/step5.md",
+    "items": [
+      {
+        "id": "25-for文",
+        "title": "25 for文"
+      },
+      {
+        "id": "26-range",
+        "title": "26 range()"
+      },
+      {
+        "id": "27-while文",
+        "title": "27 while文"
+      },
+      {
+        "id": "28-break-continue",
+        "title": "28 break / continue"
+      },
+      {
+        "id": "29-繰り返し実践",
+        "title": "29 繰り返し実践"
+      }
+    ]
+  },
+  {
+    "stepId": "step6",
+    "title": "STEP 6：データをまとめる",
+    "mdPath": "/data/step6.md",
+    "items": [
+      {
+        "id": "30-list",
+        "title": "30 list"
+      },
+      {
+        "id": "31-tuple",
+        "title": "31 tuple"
+      },
+      {
+        "id": "32-dict",
+        "title": "32 dict"
+      },
+      {
+        "id": "33-set",
+        "title": "33 set"
+      },
+      {
+        "id": "34-データ構造実践",
+        "title": "34 データ構造実践"
+      }
+    ]
+  },
+  {
+    "stepId": "step7",
+    "title": "STEP 7：関数",
+    "mdPath": "/data/step7.md",
+    "items": [
+      {
+        "id": "35-関数とは",
+        "title": "35 関数とは？"
+      },
+      {
+        "id": "36-引数",
+        "title": "36 引数"
+      },
+      {
+        "id": "37-return",
+        "title": "37 return"
+      },
+      {
+        "id": "38-デフォルト引数",
+        "title": "38 デフォルト引数"
+      },
+      {
+        "id": "39-args-kwargs",
+        "title": "39 *args / **kwargs"
+      },
+      {
+        "id": "40-関数を使ったプログラム",
+        "title": "40 関数を使ったプログラム"
+      }
+    ]
+  },
+  {
+    "stepId": "step8",
+    "title": "STEP 8：Pythonを使いこなす",
+    "mdPath": "/data/step8.md",
+    "items": [
+      {
+        "id": "41-スコープ",
+        "title": "41 スコープ"
+      },
+      {
+        "id": "42-リスト内包表記",
+        "title": "42 リスト内包表記"
+      },
+      {
+        "id": "43-enumerate-zip",
+        "title": "43 enumerate / zip"
+      },
+      {
+        "id": "44-sorted-map-filter",
+        "title": "44 sorted / map / filter"
+      },
+      {
+        "id": "45-pythonicな書き方",
+        "title": "45 Pythonicな書き方"
+      }
+    ]
+  },
+  {
+    "stepId": "step9",
+    "title": "STEP 9：ファイル操作",
+    "mdPath": "/data/step9.md",
+    "items": [
+      {
+        "id": "46-ファイルを読む",
+        "title": "46 ファイルを読む"
+      },
+      {
+        "id": "47-ファイルを書く",
+        "title": "47 ファイルを書く"
+      },
+      {
+        "id": "48-csv",
+        "title": "48 CSV"
+      },
+      {
+        "id": "49-json",
+        "title": "49 JSON"
+      },
+      {
+        "id": "50-pathlib",
+        "title": "50 pathlib"
+      }
+    ]
+  },
+  {
+    "stepId": "step10",
+    "title": "STEP 10：エラー処理",
+    "mdPath": "/data/step10.md",
+    "items": [
+      {
+        "id": "51-エラーの種類",
+        "title": "51 エラーの種類"
+      },
+      {
+        "id": "52-try-except",
+        "title": "52 try / except"
+      },
+      {
+        "id": "53-finally-else",
+        "title": "53 finally / else"
+      },
+      {
+        "id": "54-raise",
+        "title": "54 raise"
+      },
+      {
+        "id": "55-独自例外",
+        "title": "55 独自例外"
+      }
+    ]
+  },
+  {
+    "stepId": "step11",
+    "title": "STEP 11：標準ライブラリ",
+    "mdPath": "/data/step11.md",
+    "items": [
+      {
+        "id": "56-datetime",
+        "title": "56 datetime"
+      },
+      {
+        "id": "57-random",
+        "title": "57 random"
+      },
+      {
+        "id": "58-math",
+        "title": "58 math"
+      },
+      {
+        "id": "59-os-pathlib",
+        "title": "59 os / pathlib"
+      },
+      {
+        "id": "60-re",
+        "title": "60 re（正規表現）"
+      }
+    ]
+  },
+  {
+    "stepId": "step12",
+    "title": "STEP 12：実践プログラム",
+    "mdPath": "/data/step12.md",
+    "items": [
+      {
+        "id": "61-電卓",
+        "title": "61 電卓"
+      },
+      {
+        "id": "62-数当てゲーム",
+        "title": "62 数当てゲーム"
+      },
+      {
+        "id": "63-todoアプリ",
+        "title": "63 ToDoアプリ"
+      },
+      {
+        "id": "64-家計簿",
+        "title": "64 家計簿"
+      },
+      {
+        "id": "65-ファイル整理ツール",
+        "title": "65 ファイル整理ツール"
+      }
+    ]
+  },
+  {
+    "stepId": "step13",
+    "title": "STEP 13：オブジェクト指向",
+    "mdPath": "/data/step13.md",
+    "items": [
+      {
+        "id": "66-classとは",
+        "title": "66 classとは？"
+      },
+      {
+        "id": "67-インスタンス",
+        "title": "67 インスタンス"
+      },
+      {
+        "id": "68-init",
+        "title": "68 __init__"
+      },
+      {
+        "id": "69-メソッド",
+        "title": "69 メソッド"
+      },
+      {
+        "id": "70-継承",
+        "title": "70 継承"
+      },
+      {
+        "id": "71-オブジェクト指向実践",
+        "title": "71 オブジェクト指向実践"
+      }
+    ]
+  },
+  {
+    "stepId": "step14",
+    "title": "STEP 14：Python開発環境",
+    "mdPath": "/data/step14.md",
+    "items": [
+      {
+        "id": "72-ターミナル",
+        "title": "72 ターミナル"
+      },
+      {
+        "id": "73-仮想環境",
+        "title": "73 仮想環境"
+      },
+      {
+        "id": "74-pip",
+        "title": "74 pip"
+      },
+      {
+        "id": "75-パッケージ",
+        "title": "75 パッケージ"
+      },
+      {
+        "id": "76-pyproject-toml",
+        "title": "76 pyproject.toml"
+      }
+    ]
+  },
+  {
+    "stepId": "step15",
+    "title": "STEP 15：型とコード品質",
+    "mdPath": "/data/step15.md",
+    "items": [
+      {
+        "id": "77-型ヒント",
+        "title": "77 型ヒント"
+      },
+      {
+        "id": "78-dataclass",
+        "title": "78 dataclass"
+      },
+      {
+        "id": "79-pep8",
+        "title": "79 PEP 8"
+      },
+      {
+        "id": "80-lint-format",
+        "title": "80 lint / format"
+      },
+      {
+        "id": "81-読みやすいコード",
+        "title": "81 読みやすいコード"
+      }
+    ]
+  },
+  {
+    "stepId": "step16",
+    "title": "STEP 16：Git / GitHub",
+    "mdPath": "/data/step16.md",
+    "items": [
+      {
+        "id": "82-gitとは",
+        "title": "82 Gitとは？"
+      },
+      {
+        "id": "83-repository",
+        "title": "83 repository"
+      },
+      {
+        "id": "84-commit",
+        "title": "84 commit"
+      },
+      {
+        "id": "85-branch",
+        "title": "85 branch"
+      },
+      {
+        "id": "86-merge",
+        "title": "86 merge"
+      },
+      {
+        "id": "87-github",
+        "title": "87 GitHub"
+      },
+      {
+        "id": "88-pull-request",
+        "title": "88 Pull Request"
+      }
+    ]
+  },
+  {
+    "stepId": "step17",
+    "title": "STEP 17：SQL",
+    "mdPath": "/data/step17.md",
+    "items": [
+      {
+        "id": "89-データベースとは",
+        "title": "89 データベースとは？"
+      },
+      {
+        "id": "90-テーブル",
+        "title": "90 テーブル"
+      },
+      {
+        "id": "91-select",
+        "title": "91 SELECT"
+      },
+      {
+        "id": "92-insert",
+        "title": "92 INSERT"
+      },
+      {
+        "id": "93-update-delete",
+        "title": "93 UPDATE / DELETE"
+      },
+      {
+        "id": "94-where-order-by",
+        "title": "94 WHERE / ORDER BY"
+      },
+      {
+        "id": "95-group-by",
+        "title": "95 GROUP BY"
+      },
+      {
+        "id": "96-join",
+        "title": "96 JOIN"
+      }
+    ]
+  },
+  {
+    "stepId": "step18",
+    "title": "STEP 18：Python + Database",
+    "mdPath": "/data/step18.md",
+    "items": [
+      {
+        "id": "97-sqlite",
+        "title": "97 SQLite"
+      },
+      {
+        "id": "98-pythonからdbを操作",
+        "title": "98 PythonからDBを操作"
+      },
+      {
+        "id": "99-crud",
+        "title": "99 CRUD"
+      },
+      {
+        "id": "100-dbアプリ制作",
+        "title": "100 DBアプリ制作"
+      }
+    ]
+  },
+  {
+    "stepId": "step19",
+    "title": "STEP 19：Webの基礎",
+    "mdPath": "/data/step19.md",
+    "items": [
+      {
+        "id": "101-webとは",
+        "title": "101 Webとは？"
+      },
+      {
+        "id": "102-クライアントとサーバー",
+        "title": "102 クライアントとサーバー"
+      },
+      {
+        "id": "103-http",
+        "title": "103 HTTP"
+      },
+      {
+        "id": "104-url",
+        "title": "104 URL"
+      },
+      {
+        "id": "105-request-response",
+        "title": "105 Request / Response"
+      },
+      {
+        "id": "106-json",
+        "title": "106 JSON"
+      },
+      {
+        "id": "107-rest-api",
+        "title": "107 REST API"
+      }
+    ]
+  },
+  {
+    "stepId": "step20",
+    "title": "STEP 20：FastAPI",
+    "mdPath": "/data/step20.md",
+    "items": [
+      {
+        "id": "108-fastapiとは",
+        "title": "108 FastAPIとは？"
+      },
+      {
+        "id": "109-最初のapi",
+        "title": "109 最初のAPI"
+      },
+      {
+        "id": "110-get",
+        "title": "110 GET"
+      },
+      {
+        "id": "111-post",
+        "title": "111 POST"
+      },
+      {
+        "id": "112-put-delete",
+        "title": "112 PUT / DELETE"
+      },
+      {
+        "id": "113-path-parameter",
+        "title": "113 Path Parameter"
+      },
+      {
+        "id": "114-query-parameter",
+        "title": "114 Query Parameter"
+      },
+      {
+        "id": "115-request-body",
+        "title": "115 Request Body"
+      },
+      {
+        "id": "116-response",
+        "title": "116 Response"
+      }
+    ]
+  },
+  {
+    "stepId": "step21",
+    "title": "STEP 21：Pydantic",
+    "mdPath": "/data/step21.md",
+    "items": [
+      {
+        "id": "117-pydanticとは",
+        "title": "117 Pydanticとは？"
+      },
+      {
+        "id": "118-データ検証",
+        "title": "118 データ検証"
+      },
+      {
+        "id": "119-model",
+        "title": "119 Model"
+      },
+      {
+        "id": "120-nested-model",
+        "title": "120 Nested Model"
+      },
+      {
+        "id": "121-api設計",
+        "title": "121 API設計"
+      }
+    ]
+  },
+  {
+    "stepId": "step22",
+    "title": "STEP 22：本格API開発",
+    "mdPath": "/data/step22.md",
+    "items": [
+      {
+        "id": "122-router",
+        "title": "122 Router"
+      },
+      {
+        "id": "123-dependency-injection",
+        "title": "123 Dependency Injection"
+      },
+      {
+        "id": "124-middleware",
+        "title": "124 Middleware"
+      },
+      {
+        "id": "125-エラーレスポンス",
+        "title": "125 エラーレスポンス"
+      },
+      {
+        "id": "126-apiドキュメント",
+        "title": "126 APIドキュメント"
+      }
+    ]
+  },
+  {
+    "stepId": "step23",
+    "title": "STEP 23：認証",
+    "mdPath": "/data/step23.md",
+    "items": [
+      {
+        "id": "127-認証と認可",
+        "title": "127 認証と認可"
+      },
+      {
+        "id": "128-パスワード",
+        "title": "128 パスワード"
+      },
+      {
+        "id": "129-ハッシュ化",
+        "title": "129 ハッシュ化"
+      },
+      {
+        "id": "130-jwt",
+        "title": "130 JWT"
+      },
+      {
+        "id": "131-ログインapi",
+        "title": "131 ログインAPI"
+      }
+    ]
+  },
+  {
+    "stepId": "step24",
+    "title": "STEP 24：pytest",
+    "mdPath": "/data/step24.md",
+    "items": [
+      {
+        "id": "132-テストとは",
+        "title": "132 テストとは？"
+      },
+      {
+        "id": "133-pytest",
+        "title": "133 pytest"
+      },
+      {
+        "id": "134-assert",
+        "title": "134 assert"
+      },
+      {
+        "id": "135-fixture",
+        "title": "135 Fixture"
+      },
+      {
+        "id": "136-mock",
+        "title": "136 Mock"
+      },
+      {
+        "id": "137-apiテスト",
+        "title": "137 APIテスト"
+      }
+    ]
+  },
+  {
+    "stepId": "step25",
+    "title": "STEP 25：非同期Python",
+    "mdPath": "/data/step25.md",
+    "items": [
+      {
+        "id": "138-同期処理",
+        "title": "138 同期処理"
+      },
+      {
+        "id": "139-非同期処理",
+        "title": "139 非同期処理"
+      },
+      {
+        "id": "140-async-await",
+        "title": "140 async / await"
+      },
+      {
+        "id": "141-asyncio",
+        "title": "141 asyncio"
+      },
+      {
+        "id": "142-fastapi-async",
+        "title": "142 FastAPI Async"
+      }
+    ]
+  },
+  {
+    "stepId": "step26",
+    "title": "STEP 26：Linux",
+    "mdPath": "/data/step26.md",
+    "items": [
+      {
+        "id": "143-linuxとは",
+        "title": "143 Linuxとは？"
+      },
+      {
+        "id": "144-基本コマンド",
+        "title": "144 基本コマンド"
+      },
+      {
+        "id": "145-ファイル操作",
+        "title": "145 ファイル操作"
+      },
+      {
+        "id": "146-権限",
+        "title": "146 権限"
+      },
+      {
+        "id": "147-プロセス",
+        "title": "147 プロセス"
+      },
+      {
+        "id": "148-ssh",
+        "title": "148 SSH"
+      }
+    ]
+  },
+  {
+    "stepId": "step27",
+    "title": "STEP 27：Docker",
+    "mdPath": "/data/step27.md",
+    "items": [
+      {
+        "id": "149-dockerとは",
+        "title": "149 Dockerとは？"
+      },
+      {
+        "id": "150-image",
+        "title": "150 Image"
+      },
+      {
+        "id": "151-container",
+        "title": "151 Container"
+      },
+      {
+        "id": "152-dockerfile",
+        "title": "152 Dockerfile"
+      },
+      {
+        "id": "153-docker-compose",
+        "title": "153 Docker Compose"
+      },
+      {
+        "id": "154-python-docker",
+        "title": "154 Python + Docker"
+      }
+    ]
+  },
+  {
+    "stepId": "step28",
+    "title": "STEP 28：PostgreSQL",
+    "mdPath": "/data/step28.md",
+    "items": [
+      {
+        "id": "155-postgresqlとは",
+        "title": "155 PostgreSQLとは？"
+      },
+      {
+        "id": "156-db設計",
+        "title": "156 DB設計"
+      },
+      {
+        "id": "157-index",
+        "title": "157 Index"
+      },
+      {
+        "id": "158-transaction",
+        "title": "158 Transaction"
+      },
+      {
+        "id": "159-fastapi-postgresql",
+        "title": "159 FastAPI + PostgreSQL"
+      }
+    ]
+  },
+  {
+    "stepId": "step29",
+    "title": "STEP 29：セキュリティ",
+    "mdPath": "/data/step29.md",
+    "items": [
+      {
+        "id": "160-sql-injection",
+        "title": "160 SQL Injection"
+      },
+      {
+        "id": "161-xss",
+        "title": "161 XSS"
+      },
+      {
+        "id": "162-csrf",
+        "title": "162 CSRF"
+      },
+      {
+        "id": "163-cors",
+        "title": "163 CORS"
+      },
+      {
+        "id": "164-secrets",
+        "title": "164 Secrets"
+      },
+      {
+        "id": "165-apiセキュリティ",
+        "title": "165 APIセキュリティ"
+      }
+    ]
+  },
+  {
+    "stepId": "step30",
+    "title": "STEP 30：設計",
+    "mdPath": "/data/step30.md",
+    "items": [
+      {
+        "id": "166-コード設計",
+        "title": "166 コード設計"
+      },
+      {
+        "id": "167-モジュール分割",
+        "title": "167 モジュール分割"
+      },
+      {
+        "id": "168-layered-architecture",
+        "title": "168 Layered Architecture"
+      },
+      {
+        "id": "169-service",
+        "title": "169 Service"
+      },
+      {
+        "id": "170-repository",
+        "title": "170 Repository"
+      },
+      {
+        "id": "171-clean-architecture",
+        "title": "171 Clean Architecture"
+      }
+    ]
+  },
+  {
+    "stepId": "step31",
+    "title": "STEP 31：CI/CD",
+    "mdPath": "/data/step31.md",
+    "items": [
+      {
+        "id": "172-cicdとは",
+        "title": "172 CI/CDとは？"
+      },
+      {
+        "id": "173-github-actions",
+        "title": "173 GitHub Actions"
+      },
+      {
+        "id": "174-自動テスト",
+        "title": "174 自動テスト"
+      },
+      {
+        "id": "175-docker-build",
+        "title": "175 Docker Build"
+      },
+      {
+        "id": "176-自動デプロイ",
+        "title": "176 自動デプロイ"
+      }
+    ]
+  },
+  {
+    "stepId": "step32",
+    "title": "STEP 32：実務開発",
+    "mdPath": "/data/step32.md",
+    "items": [
+      {
+        "id": "177-要件定義",
+        "title": "177 要件定義"
+      },
+      {
+        "id": "178-仕様書",
+        "title": "178 仕様書"
+      },
+      {
+        "id": "179-db設計",
+        "title": "179 DB設計"
+      },
+      {
+        "id": "180-api設計",
+        "title": "180 API設計"
+      },
+      {
+        "id": "181-実装",
+        "title": "181 実装"
+      },
+      {
+        "id": "182-テスト",
+        "title": "182 テスト"
+      },
+      {
+        "id": "183-バグ修正",
+        "title": "183 バグ修正"
+      },
+      {
+        "id": "184-リファクタリング",
+        "title": "184 リファクタリング"
+      },
+      {
+        "id": "185-コードレビュー",
+        "title": "185 コードレビュー"
+      }
+    ]
+  },
+  {
+    "stepId": "step33",
+    "title": "STEP 33：卒業プロジェクト",
+    "mdPath": "/data/step33.md",
+    "items": [
+      {
+        "id": "186-要件定義",
+        "title": "186 要件定義"
+      },
+      {
+        "id": "187-設計",
+        "title": "187 設計"
+      },
+      {
+        "id": "188-db",
+        "title": "188 DB"
+      },
+      {
+        "id": "189-api",
+        "title": "189 API"
+      },
+      {
+        "id": "190-認証",
+        "title": "190 認証"
+      },
+      {
+        "id": "191-テスト",
+        "title": "191 テスト"
+      },
+      {
+        "id": "192-docker",
+        "title": "192 Docker"
+      },
+      {
+        "id": "193-cicd",
+        "title": "193 CI/CD"
+      },
+      {
+        "id": "194-デプロイ",
+        "title": "194 デプロイ"
+      },
+      {
+        "id": "195-完成・コードレビュー",
+        "title": "195 完成・コードレビュー"
+      }
+    ]
   }
-]
+        ]
