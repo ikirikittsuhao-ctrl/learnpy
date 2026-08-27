@@ -340,6 +340,42 @@
                     const markdownSource = await mdRes.text();
                     contentContainer.innerHTML = marked.parse(markdownSource);
                 }
+
+                // サイドバーのSTEPアイテムクリックハンドラ
+                document.addEventListener('click', async (e) => {
+                    const stepLink = e.target.closest('.step-link');
+                    if (stepLink) {
+                        e.preventDefault();
+                        const mdPath = stepLink.dataset.mdPath;
+                        
+                        if (mdPath) {
+                            try {
+                                const mdRes = await fetch(mdPath);
+                                const markdownSource = await mdRes.text();
+                                contentContainer.innerHTML = marked.parse(markdownSource);
+                                
+                                // ページトップにスクロール
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                
+                                // モバイルサイドバーを閉じる
+                                const sidebar = document.getElementById('sidebar');
+                                if (sidebar.classList.contains('-translate-x-full') === false) {
+                                    sidebar.classList.add('-translate-x-full');
+                                    document.getElementById('sidebar-overlay').classList.remove('opacity-100', 'pointer-events-auto');
+                                    document.getElementById('sidebar-overlay').classList.add('opacity-0', 'pointer-events-none');
+                                }
+                                
+                                // 新しいコンテンツの処理を再初期化
+                                setTimeout(() => {
+                                    initializeContentFeatures();
+                                }, 100);
+                            } catch (err) {
+                                console.error('Markdownの読み込みに失敗しました:', err);
+                            }
+                        }
+                    }
+                });
+
             } catch (err) {
                 console.error('データの取得に失敗しました:', err);
                 contentContainer.innerHTML = '<p class="text-rose-500">コンテンツの読み込みエラーが発生しました。</p>';
@@ -371,9 +407,10 @@
 
                         step.items.forEach(item => {
                             const link = document.createElement('a');
-                            link.href = `#${item.id}`;
-                            link.className = "block px-2.5 py-1.5 rounded-md hover:bg-slate-500/10 text-xs sidebar-link";
+                            link.href = "#";
+                            link.className = "block px-2.5 py-1.5 rounded-md hover:bg-slate-500/10 text-xs step-link";
                             link.textContent = item.title;
+                            link.dataset.mdPath = item.mdPath;
                             contentDiv.appendChild(link);
                         });
 
@@ -394,115 +431,204 @@
                 });
             }
 
-            // 2. コードブロックにコピペボタン追加
-            const preBlocks = contentContainer.querySelectorAll('pre');
-            preBlocks.forEach((pre) => {
-                const wrapper = document.createElement('div');
-                wrapper.className = 'code-block-wrapper';
-                pre.parentNode.insertBefore(wrapper, pre);
-                wrapper.appendChild(pre);
+            // コンテンツ機能を初期化する関数
+            function initializeContentFeatures() {
+                // 2. コードブロックにコピペボタン追加
+                const preBlocks = contentContainer.querySelectorAll('pre');
+                preBlocks.forEach((pre) => {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'code-block-wrapper';
+                    pre.parentNode.insertBefore(wrapper, pre);
+                    wrapper.appendChild(pre);
 
-                const copyBtn = document.createElement('button');
-                copyBtn.className = 'copy-btn';
-                copyBtn.innerText = 'コピー';
+                    const copyBtn = document.createElement('button');
+                    copyBtn.className = 'copy-btn';
+                    copyBtn.innerText = 'コピー';
 
-                copyBtn.addEventListener('click', () => {
-                    const codeText = pre.querySelector('code')?.innerText || pre.innerText;
-                    navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerText = 'コピー完了!';
-                        setTimeout(() => { copyBtn.innerText = 'コピー'; }, 2000);
+                    copyBtn.addEventListener('click', () => {
+                        const codeText = pre.querySelector('code')?.innerText || pre.innerText;
+                        navigator.clipboard.writeText(codeText).then(() => {
+                            copyBtn.innerText = 'コピー完了!';
+                            setTimeout(() => { copyBtn.innerText = 'コピー'; }, 2000);
+                        });
                     });
+
+                    wrapper.appendChild(copyBtn);
                 });
 
-                wrapper.appendChild(copyBtn);
-            });
+                // 3. TOC & 独自アニメーション付き完了ボタンの挿入
+                const headings = contentContainer.querySelectorAll('h2, h3');
+                const tocList = document.getElementById('toc');
+                tocList.innerHTML = '';
+                let sectionCount = 0;
 
-            // 3. TOC & 独自アニメーション付き完了ボタンの挿入
-            const headings = contentContainer.querySelectorAll('h2, h3');
-            const tocList = document.getElementById('toc');
-            let sectionCount = 0;
+                headings.forEach((heading) => {
+                    const titleText = heading.textContent.trim();
+                    let cleanId = titleText
+                        .replace(/^\d+\s*/, '')
+                        .replace(/[^\w\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff-]/g, '')
+                        .toLowerCase();
 
-            headings.forEach((heading) => {
-                const titleText = heading.textContent.trim();
-                let cleanId = titleText
-                    .replace(/^\d+\s*/, '')
-                    .replace(/[^\w\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff-]/g, '')
-                    .toLowerCase();
+                    if (titleText.includes("01 プログラミングって何")) cleanId = "01-プログラミングって何";
+                    if (titleText.includes("02 コンピューターとプログラム")) cleanId = "02-コンピューターとプログラム";
+                    if (titleText.includes("03 Pythonって何")) cleanId = "03-pythonって何";
+                    if (titleText.includes("04 Pythonを使う準備")) cleanId = "04-pythonを使う準備";
 
-                if (titleText.includes("01 プログラミングって何")) cleanId = "01-プログラミングって何";
-                if (titleText.includes("02 コンピューターとプログラム")) cleanId = "02-コンピューターとプログラム";
-                if (titleText.includes("03 Pythonって何")) cleanId = "03-pythonって何";
-                if (titleText.includes("04 Pythonを使う準備")) cleanId = "04-pythonを使う準備";
+                    heading.id = cleanId;
 
-                heading.id = cleanId;
+                    // 目次追加
+                    const li = document.createElement('li');
+                    const a = document.createElement('a');
+                    a.href = `#${cleanId}`;
+                    a.textContent = titleText;
+                    a.className = "hover:text-sky-500 block truncate transition-colors py-0.5 rounded";
+                    if (heading.tagName === 'H3') li.className = "pl-2";
+                    li.appendChild(a);
+                    tocList.appendChild(li);
 
-                // 目次追加
-                const li = document.createElement('li');
-                const a = document.createElement('a');
-                a.href = `#${cleanId}`;
-                a.textContent = titleText;
-                a.className = "hover:text-sky-500 block truncate transition-colors py-0.5 rounded";
-                if (heading.tagName === 'H3') li.className = "pl-2";
-                li.appendChild(a);
-                tocList.appendChild(li);
+                    // H3 (各セクション) に完了ボタンを差し込む (独自UI)
+                    if (heading.tagName === 'H3') {
+                        sectionCount++;
+                          
+                        const checkBtn = document.createElement('button');
+                        checkBtn.type = "button";
+                        checkBtn.className = "custom-check-btn";
+                        checkBtn.dataset.sectionId = cleanId;
+                        checkBtn.innerHTML = `
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span class="btn-text">未完了</span>
+                        `;
 
-                // H3 (各セクション) に完了ボタンを差し込む (独自UI)
-                if (heading.tagName === 'H3') {
-                    sectionCount++;
-                      
-                    const checkBtn = document.createElement('button');
-                    checkBtn.type = "button";
-                    checkBtn.className = "custom-check-btn";
-                    checkBtn.dataset.sectionId = cleanId;
-                    checkBtn.innerHTML = `
-                        <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span class="btn-text">未完了</span>
-                    `;
-
-                    heading.appendChild(checkBtn);
-                }
-            });
-
-            // 4. 進捗管理 (localStorage)
-            const progressKey = 'sennin_py_progress';
-            let savedProgress = JSON.parse(localStorage.getItem(progressKey) || '{}');
-
-            function updateProgressUI() {
-                const checkBtns = document.querySelectorAll('.custom-check-btn');
-                let checkedCount = 0;
-
-                checkBtns.forEach(btn => {
-                    const id = btn.dataset.sectionId;
-                    const textEl = btn.querySelector('.btn-text');
-
-                    if (savedProgress[id]) {
-                        btn.classList.add('checked');
-                        textEl.innerText = "完了";
-                        checkedCount++;
-                    } else {
-                        btn.classList.remove('checked');
-                        textEl.innerText = "未完了";
+                        heading.appendChild(checkBtn);
                     }
                 });
 
-                const percent = sectionCount > 0 ? Math.round((checkedCount / sectionCount) * 100) : 0;
-                document.getElementById('progress-percent').innerText = `${percent}%`;
-                document.getElementById('progress-bar').style.width = `${percent}%`;
+                // 4. 進捗管理 (localStorage)
+                const progressKey = 'sennin_py_progress';
+                let savedProgress = JSON.parse(localStorage.getItem(progressKey) || '{}');
+
+                function updateProgressUI() {
+                    const checkBtns = document.querySelectorAll('.custom-check-btn');
+                    let checkedCount = 0;
+
+                    checkBtns.forEach(btn => {
+                        const id = btn.dataset.sectionId;
+                        const textEl = btn.querySelector('.btn-text');
+
+                        if (savedProgress[id]) {
+                            btn.classList.add('checked');
+                            textEl.innerText = "完了";
+                            checkedCount++;
+                        } else {
+                            btn.classList.remove('checked');
+                            textEl.innerText = "未完了";
+                        }
+                    });
+
+                    const percent = sectionCount > 0 ? Math.round((checkedCount / sectionCount) * 100) : 0;
+                    document.getElementById('progress-percent').innerText = `${percent}%`;
+                    document.getElementById('progress-bar').style.width = `${percent}%`;
+                }
+
+                document.addEventListener('click', (e) => {
+                    const btn = e.target.closest('.custom-check-btn');
+                    if (btn) {
+                        const id = btn.dataset.sectionId;
+                        savedProgress[id] = !savedProgress[id];
+                        localStorage.setItem(progressKey, JSON.stringify(savedProgress));
+                        updateProgressUI();
+                    }
+                });
+
+                updateProgressUI();
+
+                // 7. ドキュメント内リアルタイム検索機能
+                function setupSearch(inputId, resultsId) {
+                    const input = document.getElementById(inputId);
+                    const resultsContainer = document.getElementById(resultsId);
+                    
+                    if (!input || !resultsContainer) return;
+
+                    input.addEventListener('input', () => {
+                        const query = input.value.trim().toLowerCase();
+                        if (!query) {
+                            resultsContainer.innerHTML = '';
+                            resultsContainer.classList.add('hidden');
+                            return;
+                        }
+
+                        const elements = contentContainer.querySelectorAll('h1, h2, h3, h4, p, li, blockquote');
+                        const matches = [];
+
+                        elements.forEach(el => {
+                            const text = el.innerText;
+                            if (text.toLowerCase().includes(query)) {
+                                let heading = el;
+                                while (heading && !['H1', 'H2', 'H3'].includes(heading.tagName)) {
+                                    heading = heading.previousElementSibling || heading.parentElement;
+                                }
+                                  
+                                matches.push({
+                                    text: text.length > 80 ? text.substring(0, 80) + '...' : text,
+                                    targetEl: el,
+                                    sectionTitle: heading ? heading.innerText.replace(/(完了|未完了)/g, '').trim() : '全般'
+                                });
+                            }
+                        });
+
+                        if (matches.length === 0) {
+                            resultsContainer.innerHTML = `<div class="p-3 text-slate-400 text-center">一致する結果が見つかりません</div>`;
+                        } else {
+                            resultsContainer.innerHTML = matches.slice(0, 8).map(m => `
+                                <div class="search-item p-2 hover:bg-slate-500/10 rounded cursor-pointer border-b last:border-none" style="border-color: var(--border-color);">
+                                    <div class="font-bold text-sky-500 mb-0.5 text-[10px] opacity-90">${m.sectionTitle}</div>
+                                    <div class="font-medium text-xs">${highlightText(m.text, query)}</div>
+                                </div>
+                            `).join('');
+
+                            const items = resultsContainer.querySelectorAll('.search-item');
+                            items.forEach((item, index) => {
+                                item.addEventListener('click', () => {
+                                    const target = matches[index].targetEl;
+                                      
+                                    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                                      
+                                    target.classList.remove('search-target-highlight');
+                                    void target.offsetWidth;
+                                    target.classList.add('search-target-highlight');
+
+                                    resultsContainer.classList.add('hidden');
+                                    input.value = '';
+                                      
+                                    const mobileModal = document.getElementById('mobile-search-modal');
+                                    if (mobileModal) mobileModal.classList.add('-translate-y-full');
+                                });
+                            });
+                        }
+
+                        resultsContainer.classList.remove('hidden');
+                    });
+
+                    document.addEventListener('click', (e) => {
+                        if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
+                            resultsContainer.classList.add('hidden');
+                        }
+                    });
+                }
+
+                function highlightText(text, query) {
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+                }
+
+                setupSearch('wiki-search', 'desktop-search-results');
+                setupSearch('mobile-wiki-search', 'mobile-search-results');
             }
 
-            document.addEventListener('click', (e) => {
-                const btn = e.target.closest('.custom-check-btn');
-                if (btn) {
-                    const id = btn.dataset.sectionId;
-                    savedProgress[id] = !savedProgress[id];
-                    localStorage.setItem(progressKey, JSON.stringify(savedProgress));
-                    updateProgressUI();
-                }
-            });
-
-            updateProgressUI();
+            // 初期化実行
+            initializeContentFeatures();
 
             // 5. テーマ切替機能
             const themeKey = 'sennin_py_theme';
@@ -556,91 +682,11 @@
             });
 
             resetProgressBtn.addEventListener('click', () => {
-                savedProgress = {};
+                const progressKey = 'sennin_py_progress';
                 localStorage.removeItem(progressKey);
-                updateProgressUI();
+                location.reload();
                 closePopover();
             });
-
-            // 7. ドキュメント内リアルタイム検索機能
-            function setupSearch(inputId, resultsId) {
-                const input = document.getElementById(inputId);
-                const resultsContainer = document.getElementById(resultsId);
-
-                input.addEventListener('input', () => {
-                    const query = input.value.trim().toLowerCase();
-                    if (!query) {
-                        resultsContainer.innerHTML = '';
-                        resultsContainer.classList.add('hidden');
-                        return;
-                    }
-
-                    const elements = contentContainer.querySelectorAll('h1, h2, h3, h4, p, li, blockquote');
-                    const matches = [];
-
-                    elements.forEach(el => {
-                        const text = el.innerText;
-                        if (text.toLowerCase().includes(query)) {
-                            let heading = el;
-                            while (heading && !['H1', 'H2', 'H3'].includes(heading.tagName)) {
-                                heading = heading.previousElementSibling || heading.parentElement;
-                            }
-                              
-                            matches.push({
-                                text: text.length > 80 ? text.substring(0, 80) + '...' : text,
-                                targetEl: el,
-                                sectionTitle: heading ? heading.innerText.replace(/(完了|未完了)/g, '').trim() : '全般'
-                            });
-                        }
-                    });
-
-                    if (matches.length === 0) {
-                        resultsContainer.innerHTML = `<div class="p-3 text-slate-400 text-center">一致する結果が見つかりません</div>`;
-                    } else {
-                        resultsContainer.innerHTML = matches.slice(0, 8).map(m => `
-                            <div class="search-item p-2 hover:bg-slate-500/10 rounded cursor-pointer border-b last:border-none" style="border-color: var(--border-color);">
-                                <div class="font-bold text-sky-500 mb-0.5 text-[10px] opacity-90">${m.sectionTitle}</div>
-                                <div class="font-medium text-xs">${highlightText(m.text, query)}</div>
-                            </div>
-                        `).join('');
-
-                        const items = resultsContainer.querySelectorAll('.search-item');
-                        items.forEach((item, index) => {
-                            item.addEventListener('click', () => {
-                                const target = matches[index].targetEl;
-                                  
-                                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                  
-                                target.classList.remove('search-target-highlight');
-                                void target.offsetWidth;
-                                target.classList.add('search-target-highlight');
-
-                                resultsContainer.classList.add('hidden');
-                                input.value = '';
-                                  
-                                const mobileModal = document.getElementById('mobile-search-modal');
-                                if (mobileModal) mobileModal.classList.add('-translate-y-full');
-                            });
-                        });
-                    }
-
-                    resultsContainer.classList.remove('hidden');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!input.contains(e.target) && !resultsContainer.contains(e.target)) {
-                        resultsContainer.classList.add('hidden');
-                    }
-                });
-            }
-
-            function highlightText(text, query) {
-                const regex = new RegExp(`(${query})`, 'gi');
-                return text.replace(regex, '<mark class="search-highlight">$1</mark>');
-            }
-
-            setupSearch('wiki-search', 'desktop-search-results');
-            setupSearch('mobile-wiki-search', 'mobile-search-results');
 
             // 8. モバイルサイドバー & スライドイン検索制御
             const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -668,11 +714,6 @@
             });
 
             overlay.addEventListener('click', closeSidebar);
-            document.addEventListener('click', (e) => {
-                if (e.target.classList.contains('sidebar-link')) {
-                    closeSidebar();
-                }
-            });
 
             const openSearchBtn = document.getElementById('open-mobile-search-btn');
             const closeSearchBtn = document.getElementById('close-mobile-search-btn');
