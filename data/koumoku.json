@@ -1,0 +1,31 @@
+[
+  {
+    "stepId": "step0",
+    "title": "STEP 0: プログラミングを知る",
+    "mdPath": "/data/step0.md",
+    "items": [
+      {
+        "id": "01-プログラミングって何",
+        "title": "01 プログラミングって何？"
+      },
+      {
+        "id": "02-コンピューターとプログラム",
+        "title": "02 コンピューターとプログラム"
+      },
+      {
+        "id": "03-pythonって何",
+        "title": "03 Pythonって何？"
+      },
+      {
+        "id": "04-pythonを使う準備",
+        "title": "04 Pythonを使う準備"
+      }
+    ]
+  },
+  {
+    "stepId": "step1",
+    "title": "STEP 1: 基本文法 (準備中)",
+    "mdPath": null,
+    "items": []
+  }
+]
